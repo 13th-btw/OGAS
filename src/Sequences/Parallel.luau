@@ -7,7 +7,7 @@ function Parallel.new(data)
 	return data or {}
 end
 
-function Parallel:item(namespace, name, args)
+function Parallel:Item(namespace, name, args)
 	return {
 		name = string.format("%s.%s", namespace, name),
 		args = args,

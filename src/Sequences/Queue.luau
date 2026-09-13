@@ -7,7 +7,7 @@ function Queue.new(data)
 	return data or {}
 end
 
-function Queue:item(namespace, name, args)
+function Queue:Item(namespace, name, args)
 	return {
 		name = string.format("%s.%s", namespace, name),
 		args = args,
