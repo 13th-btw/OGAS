@@ -1,0 +1,20 @@
+# larvae configuration, run `larvae self code` for editor completion.
+# No default.project.json found, the roblox-string target needs one
+# or a [requires.mounts] table.
+
+input = "src"
+output = "dist"
+target = "roblox-string"
+
+[fmt]
+recommended = true
+column_width = 120
+indent_type = "tabs"
+indent_width = 4
+quote_style = "auto-prefer-double"
+
+[lint]
+recommended = true
+std = "roblox"
+# Set a level for one lint under [lint.rules], or for a whole kind
+# under [lint.groups]. `larvae lint --explain <name>` describes one.
