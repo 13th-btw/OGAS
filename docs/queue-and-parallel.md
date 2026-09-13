@@ -7,7 +7,7 @@
 ## `:item(namespace, name, args)`
 `:item()` creates a new item inside of created `Queue`/`Parallel`. Lets see what each argument do:
 
-- `namespace` - basically, a system module name. You can learn what system is [here]()
+- `namespace` - basically, a system module name
 - `name` - name of function that you want to execute from `namespace`
 - `args` - table that have all arguments for function `name`
 

@@ -2,7 +2,7 @@
 `System` is basically basic modules
 
 ## How to create a system?
-`System` is module located in `OGAS/Systems` folder. Their api automatically used in [`Executor:context()`]() function
+`System` is module located in `OGAS/Systems` folder. Their api automatically used in `Executor:context()` function
 
 ### Code example
 ```lua
