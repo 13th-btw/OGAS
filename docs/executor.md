@@ -10,6 +10,14 @@ This function used to execute any `Action` with optional additional `context`
 ## `:ExecutePlan(PLAN, ADDITIONAL_CONTEXT)`
 This function executes plan that made by `Planner:Plan()`
 
+## `:ExecuteMachineAction(MACHINE, NAME, ADDITIONAL_CONTEXT)`
+This function executes machines action by its `name`
+sets `context.machine` to `MACHINE`
+
+## `:ExecuteMachinePlan(MACHINE, PLAN, ADDITIONAL_CONTEXT)`
+Same as `:ExecutePlan()` but takes in account all states
+you can set `goal.state` to have goal make machine be in particullar state
+
 ## Code example
 ```lua
 local Players = game:GetService("Players")
@@ -22,7 +30,7 @@ local message = Action.new({
 })
 
 Players.PlayedAdded:Connect(function(player)
-    Executor:execute(message, {
+    Executor:Execute(message, {
         player = player,
         playerJoined = true
     })

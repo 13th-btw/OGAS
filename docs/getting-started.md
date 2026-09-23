@@ -22,5 +22,5 @@ Modules can be divided in several groups:
 - **System** - very situational module for usage but required for `Executor`. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/system.md)
 - **Action** - main constructor for actions, requires `Queue`/`Parallel`/`If` to made. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/action.md)
 - **Queue** and **Parallel** - list of *steps* or *components* uses. Difference between them is that parallel is async. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/queue-and-parallel.md)
-- **If** and **Switch** - main conditions. Its requires `Queue`/`Parallel` to be used. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/if.md)
+- **If** and **Switch** - main conditions. Its requires `Queue`/`Parallel` to be used. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/if-and-switch.md)
 - **Code** - for those who want code seperate parts of action. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/code.md)

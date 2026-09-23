@@ -1,10 +1,15 @@
-local function solve(actions, context, goal, plan, cost)
+local function solve(actions, context, goal, isMachine, plan, cost)
 	local goal = goal
 	local plan = plan
 
 	local satisfied = true
 	for name, value in pairs(goal) do
-		if context[name] ~= value then
+		if name == "state" and isMachine then
+			if context.machine.state ~= value then
+				satisfied = false
+				break
+			end
+		elseif context[name] ~= value and name ~= "state" then
 			satisfied = false
 			break
 		end
@@ -49,7 +54,7 @@ local function solve(actions, context, goal, plan, cost)
 		local nextPlan = table.clone(plan)
 		table.insert(nextPlan, 1, action.name)
 
-		local resultPlan, resultCost = solve(actions, context, nextGoal, nextPlan, cost + action.cost)
+		local resultPlan, resultCost = solve(actions, context, nextGoal, isMachine, nextPlan, cost + action.cost)
 
 		if resultPlan and resultCost < lowestCost then
 			bestPlan = resultPlan
@@ -63,11 +68,16 @@ end
 local Planner = {}
 
 function Planner:Plan(actions, context)
-	local solved, lowestCost = solve(actions, context, context.goal, {}, 0)
+	local solved, lowestCost = solve(actions, context, context.goal, context.machine ~= nil, {}, 0)
+
+	if not solved then
+		return nil, lowestCost
+	end
 
 	local planned = {
 		cost = lowestCost,
 	}
+
 	for _, required in ipairs(solved) do
 		for _, action in ipairs(actions) do
 			if action.name == required then
@@ -78,6 +88,19 @@ function Planner:Plan(actions, context)
 	end
 
 	return planned, solved
+end
+
+function Planner:PlanMachine(machine, context)
+	context.machine = machine
+
+	local actions = {}
+	for _, state in ipairs(machine.states) do
+		for _, action in ipairs(state) do
+			table.insert(actions, action)
+		end
+	end
+
+	return Planner:Plan(actions, context)
 end
 
 return Planner

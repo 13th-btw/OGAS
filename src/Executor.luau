@@ -1,5 +1,28 @@
 local System = require(script.Parent.System)
 
+local function resolve(value, variables)
+	if type(value) == "string" then
+		if string.sub(value, 1, 1) == "#" then
+			local variableName = string.sub(value, 2)
+			return variables[variableName]
+		end
+
+		return value
+	end
+
+	if type(value) == "table" then
+		local resolved = {}
+
+		for key, child in pairs(value) do
+			resolved[key] = resolve(child, variables)
+		end
+
+		return resolved
+	end
+
+	return value
+end
+
 local function steps(leftSteps, context)
 	for _, step in ipairs(leftSteps) do
 		if type(step) ~= "table" then
@@ -43,7 +66,7 @@ local function steps(leftSteps, context)
 
 		for _, item in ipairs(step) do
 			local itemName = string.split(item.name, ".")
-			local itemArgs = item.args or {}
+			local itemArgs = resolve(item.args or {}, context.variables)
 
 			local itemNamespace = itemName[1]
 			local itemFunction = itemName[2]
@@ -65,7 +88,7 @@ end
 local Executor = {}
 
 function Executor:Context(additional)
-	local context = additional or {}
+	local context = additional or { variables = {} }
 
 	for name, system in System:systems() do
 		context[name] = system
@@ -109,6 +132,17 @@ function Executor:ExecutePlan(plan, additional)
 	end
 
 	return context
+end
+
+function Executor:ExecuteMachineAction(machine, name, additional)
+	additional.machine = machine
+	machine:TriggerAction(name, Executor:Context(additional))
+end
+
+function Executor:ExecuteMachinePlan(machine, plan, additional)
+	for _, action in ipairs(plan) do
+		Executor:ExecuteMachineAction(machine, action.name, additional)
+	end
 end
 
 return Executor

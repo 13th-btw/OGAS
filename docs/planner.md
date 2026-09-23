@@ -8,6 +8,9 @@ This function plans best actions to execute based on their `action.cost` propert
 
 `CONTEXT` required to be setted by hand with required property `goal`. `goal` used as "requirement" to make a full plan, its compares same properties in `CONTEXT` and `goal` (for example: `CONTEXT.player == goal.player`)
 
+## `:PlanMachine(MACHINE, CONTEXT)`
+Same as `:Plan()` but takes in account all states and their actions of `MACHINE`
+
 ## Code example
 ```lua
 local Players = game:GetService("Players")
