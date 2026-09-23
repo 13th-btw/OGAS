@@ -12,13 +12,14 @@ If long story short, you create own systems (learn more about them [here](https:
 
 Modules can be divided in several groups:
 - **Core**
-- - `Executor`, `Planner`, `Action`
+- - `Executor`, `Planner`, `Machine`, `Action`
 - **Sequences**
 - - `Queue` and `Parallel`, `If` and `Switch`, `Code`
 
 ### List of all modules
 - **Executor** - the core of whole system. Use executor to use any action. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/executor.md)
 - **Planner** - GOAP helper. Provides plans for provided actions list. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/planner.md)
+- **Planner** - Another GOAP helper. Provides fully working state machine that also supported by others modules. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/machine.md)
 - **System** - very situational module for usage but required for `Executor`. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/system.md)
 - **Action** - main constructor for actions, requires `Queue`/`Parallel`/`If` to made. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/action.md)
 - **Queue** and **Parallel** - list of *steps* or *components* uses. Difference between them is that parallel is async. [Learn more here](https://github.com/nevervoyage/OGAS/blob/main/docs/queue-and-parallel.md)
